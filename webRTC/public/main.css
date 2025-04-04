@@ -76,8 +76,8 @@ body {
 .main-video {
     grid-column: 1 / -1;
     grid-row: 1;
-    max-width: 960px;
-    max-height: 540px;
+    max-width: 600px;
+    max-height: 400px;
     justify-self: center;
     width: 100%;
     border: 2px solid rgba(255, 255, 255, 0.1);
