@@ -3,14 +3,9 @@
     "version": "1.0.0",
     "description": "WebRTC Video Chat Application",
     "main": "server/server.js",
-    "engines": {
-        "node": "18.x"
-    },
     "scripts": {
         "start": "node server/server.js",
-        "dev": "nodemon server/server.js",
-        "build": "echo 'No build step required'",
-        "vercel-build": "echo 'Build step complete'"
+        "dev": "nodemon server/server.js"
     },
     "dependencies": {
         "express": "^4.18.2",
