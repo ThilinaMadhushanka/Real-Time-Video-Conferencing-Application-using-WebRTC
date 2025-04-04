@@ -1,27 +1,20 @@
 const express = require("express");
 const http = require("http");
 const { Server } = require("socket.io");
-const path = require("path");
 
 const app = express();
 const server = http.createServer(app);
-
-// Enable trust proxy for Vercel
-app.enable('trust proxy');
-
-// Update static file serving with absolute path
-app.use(express.static(path.join(__dirname, '../public')));
-
-// Update CORS and WebSocket config for Vercel
 const io = new Server(server, {
   cors: {
     origin: "*",
     methods: ["GET", "POST"],
-    transports: ['websocket', 'polling']
   },
-  path: "/socket.io/",
-  addTrailingSlash: false
+  transports: ["websocket", "polling"],
+  pingTimeout: 60000,
+  pingInterval: 25000,
 });
+
+app.use(express.static("public"));
 
 const rooms = {};
 

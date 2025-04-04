@@ -1,10 +1,8 @@
 const socket = io({
-  path: '/socket.io/',
-  transports: ['websocket', 'polling'],
+  transports: ["websocket", "polling"],
   reconnection: true,
   reconnectionAttempts: 5,
   reconnectionDelay: 1000,
-  secure: true
 });
 let localStream;
 let peerConnections = {}; 
