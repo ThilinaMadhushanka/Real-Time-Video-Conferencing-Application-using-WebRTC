@@ -6,16 +6,21 @@ const path = require("path");
 const app = express();
 const server = http.createServer(app);
 
-// Update static file serving
+// Enable trust proxy for Vercel
+app.enable('trust proxy');
+
+// Update static file serving with absolute path
 app.use(express.static(path.join(__dirname, '../public')));
 
-// Update CORS for production
+// Update CORS and WebSocket config for Vercel
 const io = new Server(server, {
   cors: {
-    origin: process.env.VERCEL_URL || "*",
-    methods: ["GET", "POST"]
+    origin: "*",
+    methods: ["GET", "POST"],
+    transports: ['websocket', 'polling']
   },
-  path: "/socket.io/"
+  path: "/socket.io/",
+  addTrailingSlash: false
 });
 
 const rooms = {};

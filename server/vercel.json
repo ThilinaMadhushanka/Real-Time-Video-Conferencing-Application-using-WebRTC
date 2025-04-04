@@ -13,11 +13,14 @@
   "routes": [
     {
       "src": "/socket.io/(.*)",
-      "dest": "server/server.js"
+      "dest": "/server/server.js"
     },
     {
-      "src": "/(.*)",
-      "dest": "public/$1"
+      "handle": "filesystem"
+    },
+    {
+      "src": "/.*",
+      "dest": "/server/server.js"
     }
   ]
 }
