@@ -1,20 +1,22 @@
 const express = require("express");
 const http = require("http");
 const { Server } = require("socket.io");
+const path = require("path");
 
 const app = express();
 const server = http.createServer(app);
+
+// Update static file serving
+app.use(express.static(path.join(__dirname, '../public')));
+
+// Update CORS for production
 const io = new Server(server, {
   cors: {
-    origin: "*",
-    methods: ["GET", "POST"],
+    origin: process.env.VERCEL_URL || "*",
+    methods: ["GET", "POST"]
   },
-  transports: ["websocket", "polling"],
-  pingTimeout: 60000,
-  pingInterval: 25000,
+  path: "/socket.io/"
 });
-
-app.use(express.static("public"));
 
 const rooms = {};
 
